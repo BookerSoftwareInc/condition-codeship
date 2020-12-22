@@ -13,13 +13,6 @@ module.exports = function (pluginConfig, config, cb) {
     ))
   }
 
-  if (env.hasOwnProperty('CI_PULL_REQUEST') && env.CI_PULL_REQUEST !== 'false') {
-    return cb(new SRError(
-      'This test run was triggered by a pull request and therefore a new version won’t be published.',
-      'EPULLREQUEST'
-    ))
-  }
-
   if (options.branch === env.CI_BRANCH) return cb(null)
 
   if (semver.valid(env.CI_BRANCH)) {
